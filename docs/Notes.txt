@@ -16,3 +16,4 @@ __Security
 __Misc
 - Spent time downloading Postman
 - mediaRecorder.addEventListener('dataavailable') is not firing for some reason. Need to figure out why.
+- Seperate out into proper React components
