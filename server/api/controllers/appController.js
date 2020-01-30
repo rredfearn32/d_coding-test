@@ -1,6 +1,7 @@
 exports.get_all_recordings = function(req, res) {
     res.json({
-        data: 'get_all_recordings'
+        data: 'get_all_recordings',
+        payload: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
     });
 }
 
