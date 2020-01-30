@@ -16,7 +16,7 @@ const Home: React.FC = () => {
 
         const mediaRecorder = new MediaRecorder(stream, options);
         
-        mediaRecorder.addEventListener('dataavailable', (e: any) => {
+        mediaRecorder.ondataavailable = (e: any) => {
             if(e.data.size > 0) {
                 recordedChunks.push(e.data);
             }
@@ -26,21 +26,38 @@ const Home: React.FC = () => {
                 setRecording(false);
                 setStopped(false);
             }
-        });
+        };
 
-        mediaRecorder.addEventListener('stop', (e: any) => {
+        mediaRecorder.onstop = (e: any) => {
             player.src = URL.createObjectURL(new Blob(recordedChunks));
 
             // Then send it to the server for translation
-        });
+            fetch('http://localhost:3001/recordings')
+            .then(res => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+        };
+        console.log('started recording');
 
         mediaRecorder.start();
         setRecording(true);
     }
 
     const startRecording = (event: any) => {
-        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-        .then(handleAudio);
+        navigator.mediaDevices.enumerateDevices()
+        .then(devices => {
+            const audioInputDevice = devices.find(device => {
+                return device.kind === 'audioinput';
+            });
+            
+            if(audioInputDevice) {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+                .then(handleAudio);
+            }
+        })
     }
 
     const stopRecording = (event: any) => {
