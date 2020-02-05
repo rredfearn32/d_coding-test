@@ -8,7 +8,7 @@ const Home: React.FC = () => {
     return(
         <div className="container">
             <div className="row">
-                <div className="col-12">
+                <div className="col-sm-12 col-md-6 offset-md-3">
                     <AudioRecorder></AudioRecorder>
                     <RecentRecordings></RecentRecordings>
                 </div>

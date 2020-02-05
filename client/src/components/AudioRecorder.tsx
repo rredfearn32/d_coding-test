@@ -73,7 +73,7 @@ const AudioRecorder: React.FC = () => {
     }
 
     return (
-        <div>
+        <div className="text-center mt-5">
             {browserCanRecordMedia ? 
                 <RecorderButton
                     recording={recording}

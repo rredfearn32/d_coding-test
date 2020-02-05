@@ -1,11 +1,12 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Header from './Components/Header';
-import Footer from './Components/Footer';
+import Header from './Components/PageComponents/Header';
+import Footer from './Components/PageComponents/Footer';
 
 import Home from './Pages/Home';
 import About from './Pages/About';
+import History from './Pages/History';
 import PageNotFound from './Pages/PageNotFound';
 
 const App: React.FC = () => {
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path='/' component={Home} />
             <Route exact path='/about' component={About} />
+            <Route exact path='/history' component={History} />
             <Route exact path='*' component={PageNotFound} />
           </Switch>
         </div>
