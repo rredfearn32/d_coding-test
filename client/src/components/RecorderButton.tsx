@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     recording: boolean;
@@ -16,14 +16,14 @@ const RecorderButton: React.FC<Props> = (props: any) => {
                 {props.recording ?
                     <div>
                         <button type="button" className="btn" onClick={props.stopRecording}>
-                            <FontAwesomeIcon icon={faCoffee} />
+                            <FontAwesomeIcon icon={faStop} />
                         </button>
                         <p>Stop recording!</p>
                     </div>
                 :
                     <div>
                         <button type="button" className="btn" onClick={props.startRecording}>
-                            <FontAwesomeIcon icon={faCoffee} />
+                            <FontAwesomeIcon icon={faPlay} />
                         </button>
                         <p>Start recording!</p>
                     </div>

@@ -1,19 +1,16 @@
 import React, {useState} from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
-import AudioRecorder from './AudioRecorder';
+import AudioRecorder from '../Components/AudioRecorder';
+import RecentRecordings from '../Components/RecentRecordings';
 
 const Home: React.FC = () => {
-
-    
 
     return(
         <div className="container">
             <div className="row">
                 <div className="col-12">
                     <AudioRecorder></AudioRecorder>
+                    <RecentRecordings></RecentRecordings>
                 </div>
             </div>
         </div>
