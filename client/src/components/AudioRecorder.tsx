@@ -2,34 +2,32 @@ import React, {useState} from 'react';
 
 import RecorderButton from './RecorderButton';
 
+var mediaRecorder:any;
+var player:any;
+
 const AudioRecorder: React.FC = () => {
 
-    let player:any = React.createRef();
+    player = React.createRef();
 
     const browserCanRecordMedia = (navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     const [recording, setRecording] = useState(false);
-    const [stopped, setStopped] = useState(false);
 
     const handleAudio = (stream: any) => {
         const options: MediaRecorderOptions = {mimetype: 'audio/webm'} as MediaRecorderOptions;
         const recordedChunks: BlobPart[] = [];
 
-        const mediaRecorder = new MediaRecorder(stream, options);
+        mediaRecorder = new MediaRecorder(stream, options);
         
-        mediaRecorder.ondataavailable = (e: any) => {
+        mediaRecorder.addEventListener('dataavailable', (e: any) => {
+            console.log('Processing data...');
             if(e.data.size > 0) {
                 recordedChunks.push(e.data);
             }
+        });
 
-            if(stopped === true && recording === true) {
-                mediaRecorder.stop();
-                setRecording(false);
-                setStopped(false);
-            }
-        };
-
-        mediaRecorder.onstop = (e: any) => {
-            player.src = URL.createObjectURL(new Blob(recordedChunks));
+        mediaRecorder.addEventListener('stop', (e: any) => {
+            console.log('Stopped recording');
+            player.current.src = URL.createObjectURL(new Blob(recordedChunks));
 
             // Then send it to the server for translation
             fetch('http://localhost:3001/recordings')
@@ -38,9 +36,11 @@ const AudioRecorder: React.FC = () => {
             })
             .then(data => {
                 console.log(data);
-            })
-        };
-        console.log('started recording');
+            });
+            setRecording(false);
+        });
+
+        console.log('Started recording!');
 
         mediaRecorder.start();
         setRecording(true);
@@ -62,13 +62,12 @@ const AudioRecorder: React.FC = () => {
             }
         })
         setRecording(true);
-        setStopped(false);
-        console.log('Start recording!');
+        // console.log('Start recording!');
     }
 
     const stopRecording = (event: any) => {
-        setStopped(true);
         setRecording(false);
+        mediaRecorder.stop();
         console.log('Stop recording!');
     }
 
