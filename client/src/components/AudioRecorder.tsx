@@ -2,10 +2,10 @@ import React, {useState} from 'react';
 
 import RecorderButton from './RecorderButton';
 
-var mediaRecorder:any;
-var player:any;
-
 const AudioRecorder: React.FC = () => {
+
+    var mediaRecorder:any;
+    var player:any;
 
     player = React.createRef();
 
@@ -59,10 +59,10 @@ const AudioRecorder: React.FC = () => {
                 .catch((err) => {
                     console.log('The following getUserMedia error occured: ' + err);
                 });
+            } else {
+
             }
-        })
-        setRecording(true);
-        // console.log('Start recording!');
+        });
     }
 
     const stopRecording = (event: any) => {
