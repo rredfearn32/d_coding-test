@@ -9,8 +9,29 @@ const AudioRecorder: React.FC = () => {
 
     player = React.createRef();
 
-    const browserCanRecordMedia = (navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
+    const [browserCanRecordMedia, setBrowserCanRecordMedia] = useState(false);
     const [recording, setRecording] = useState(false);
+
+    const checkBrowserCanRecord = () => {
+        if(navigator.mediaDevices) {
+            navigator.mediaDevices.enumerateDevices()
+            .then(devices => {
+                const audioInputDevice = devices.find(device => {
+                    return device.kind === 'audioinput';
+                });
+                
+                if(audioInputDevice) {
+                    setBrowserCanRecordMedia(true);
+                } else {
+                    setBrowserCanRecordMedia(false);
+                }
+            });
+        } else {
+            setBrowserCanRecordMedia(false);
+        }
+    }
+
+    checkBrowserCanRecord()
 
     const handleAudio = (stream: any) => {
         const options: MediaRecorderOptions = {mimetype: 'audio/webm'} as MediaRecorderOptions;
@@ -47,21 +68,10 @@ const AudioRecorder: React.FC = () => {
     }
 
     const startRecording = (event: any) => {
-        navigator.mediaDevices.enumerateDevices()
-        .then(devices => {
-            const audioInputDevice = devices.find(device => {
-                return device.kind === 'audioinput';
-            });
-            
-            if(audioInputDevice) {
-                navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-                .then(handleAudio)
-                .catch((err) => {
-                    console.log('The following getUserMedia error occured: ' + err);
-                });
-            } else {
-
-            }
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+        .then(handleAudio)
+        .catch((err) => {
+            console.log('The following getUserMedia error occured: ' + err);
         });
     }
 
@@ -80,11 +90,10 @@ const AudioRecorder: React.FC = () => {
                     stopRecording={stopRecording}>
                 </RecorderButton>
             :
-                <div>
-                    Sorry, your browser does not support audio recording.
-                </div>
+                <p>
+                    Your browser or device does not support audio recording.
+                </p>
             }
-            {/* <input type="file" accept="audio/*" capture onChange={recordAudio} /> */}
             <audio ref={player} controls></audio>
         </div>
     )
