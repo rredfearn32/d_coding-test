@@ -1,13 +1,13 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Header from './Components/PageComponents/Header';
-import Footer from './Components/PageComponents/Footer';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
 
-import Home from './Pages/Home';
-import About from './Pages/About';
-import History from './Pages/History';
-import PageNotFound from './Pages/PageNotFound';
+import Home from './pages/Home';
+import About from './pages/About';
+import History from './pages/History';
+import PageNotFound from './pages/PageNotFound';
 
 const App: React.FC = () => {
   return (

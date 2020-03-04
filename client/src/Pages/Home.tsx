@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
-import AudioRecorder from '../Components/AudioRecorder';
-import RecentRecordings from '../Components/RecentRecordings';
+import AudioRecorder from '../components/AudioRecorder';
+import RecentRecordings from '../components/RecentRecordings';
 
 const Home: React.FC = () => {
 
