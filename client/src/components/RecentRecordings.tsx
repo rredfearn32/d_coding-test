@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
 interface Props {}
 
-const RecentRecordings: React.FC<Props> = (props: any) => {
+const RecentRecordings: FC<Props> = (props: any) => {
 
     const RECORDINGS = [
         'Recording One',

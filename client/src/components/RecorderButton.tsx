@@ -1,15 +1,15 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay, faStop } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     recording: boolean;
-    startRecording: (event: any) =>void;
-    stopRecording: (event: any) =>void;
+    startRecording: (event: any) => void;
+    stopRecording: (event: any) => void;
 }
 
-const RecorderButton: React.FC<Props> = (props: any) => {
+const RecorderButton: FC<Props> = (props: any) => {
 
     return (
             <div>

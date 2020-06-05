@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
-const History: React.FC = () => {
+const History: FC = () => {
 
     return(
         <div>

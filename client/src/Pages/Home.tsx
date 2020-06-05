@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
 import AudioRecorder from '../Components/AudioRecorder';
 import RecentRecordings from '../Components/RecentRecordings';
 
-const Home: React.FC = () => {
+const Home: FC = () => {
 
     return(
         <div className="container">

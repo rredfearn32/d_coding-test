@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
-const About: React.FC = () => {
+const About: FC = () => {
 
     return(
         <div>

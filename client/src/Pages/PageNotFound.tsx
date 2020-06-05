@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState, FC } from 'react';
 
-const PageNotFound: React.FC = () => {
+const PageNotFound: FC = () => {
 
     return(
         <div>
